@@ -4,7 +4,7 @@
 ## Client
 The client is written in *Node.js*, using *React.js* in order to display the front-end elements. Besides, it uses *Webpack 4* and *Babel 7* for compiling/bundling all the Javascript code to get it working on browsers.
 
-Live Version: `https://multictactoe-game.web.app/`
+Live Version: [https://multictactoe-game.web.app](https://multictactoe-game.web.app)
 
 The following commands are necessary for deploys and to run it locally on your machine.
 ```sh
