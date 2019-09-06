@@ -1,0 +1,16 @@
+{
+    "short_name": "Multictactoe",
+    "name": "Multictactoe",
+    "icons": [
+      {
+        "src": "favicon.png",
+        "sizes": "64x24",
+        "type": "image/x-icon"
+      }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#000",
+    "background_color": "#000"
+  }
+  
