@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --open --hot --mode development",
     "build": "webpack --mode production",
-    "deploy": "vpdate"
+    "predeploy": "npm run build",
+    "deploy": "firebase deploy"
   },
   "license": "MIT",
   "devDependencies": {
