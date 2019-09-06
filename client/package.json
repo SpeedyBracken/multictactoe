@@ -31,5 +31,8 @@
       "email": "guilhermebromonschenkel@gmail.com",
       "url": "https://github.com/guilhermebkel"
     }
-  ]
+  ],
+  "dependencies": {
+    "react-router-dom": "^5.0.1"
+  }
 }
