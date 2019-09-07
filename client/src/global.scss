@@ -7,7 +7,10 @@ body, html {
   font-family: 'Lato', sans-serif !important;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased !important;
-  background-color: #FFF;
+  background-image: linear-gradient(to bottom, #493E6C, #BD5773);
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
 }
 
 button {
