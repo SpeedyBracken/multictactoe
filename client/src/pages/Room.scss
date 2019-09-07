@@ -14,13 +14,13 @@
 
     .tictactoe-grid {
         display: grid;
-        width: 600px;
-        height: 600px;
         grid-template-columns: auto auto auto;
         grid-gap: 5px;
         margin: 20px auto auto;
 
         .tictactoe-item {
+            width: 200px;
+            height: 200px;
             background-color: #FFF;
             border-radius: 3px;
             border-width: 0;
