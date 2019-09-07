@@ -14,9 +14,9 @@ export default class Login extends Component{
     render(){
         return (
             <Zoom top>
-                <div style={{ display: "flex", height: "100vh", width: "100vw", flexDirection: "column" }}>
+                <div className="login-container">
                     <img src={Logo} />
-                    <form className="login-container">
+                    <form className="form-container">
                         <input placeholder='Nickname' />
                         <button type="submit">Login</button>
                     </form>
