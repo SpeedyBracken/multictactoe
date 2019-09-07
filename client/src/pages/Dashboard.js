@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import Fade from 'react-reveal/Fade'
+import Zoom from 'react-reveal/Zoom'
+
+import RoomCard from '~/components/RoomCard'
 
 import Logo from '~/assets/logo_white.png'
 
@@ -47,7 +50,7 @@ export default class Dashboard extends Component{
                     </form>
                     <div className="rooms-container">
                         {
-                            //rooms.map(room => <Card title={room.title} />)
+                            this.state.rooms.map(room => <Zoom bottom cascade><RoomCard title={room.title} key={room.title} /></Zoom>)
                         }
                     </div>
                 </div>

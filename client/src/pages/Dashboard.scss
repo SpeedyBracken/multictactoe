@@ -11,20 +11,24 @@
     }
 
     form {
-        margin: 0 auto auto;
+        margin: 0 auto 10px;
+        width: 280px;
         height: 30px;
         align-items: center;
         display: flex;
+        box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.15);
     
         input {
             height: 100%;
             padding: 0 10px;
+            width: 100%;
             margin: auto;
             border-width: 0;
             border-radius: 3px 0 0 3px;
             outline: none;
         }
         button {
+            width: 60%;
             border: 0;
             padding: 0 10px;
             border-radius: 0 3px 3px 0;
