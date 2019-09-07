@@ -4,7 +4,8 @@ import { BrowserRouter, Route } from 'react-router-dom'
 
 import App from './App'
 
-import './global.scss'
+import 'antd/dist/antd.css'
+import './index.scss'
 
 ReactDOM.render(
     <BrowserRouter basename={process.env.PUBLIC_URL}>

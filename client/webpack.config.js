@@ -1,5 +1,13 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin")
+const webpack = require('webpack')
+const path = require('path')
+
 module.exports = {
+  resolve: {
+    alias: {
+      '~': path.resolve(__dirname, 'src/')
+    }
+  },
   devServer: {
     historyApiFallback: true
   },
@@ -41,6 +49,12 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./public/index.html",
       filename: "./index.html"
-    })
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV === 'production' ? 'production' : 'development'),
+        'API_URL': JSON.stringify(process.env.NODE_ENV === 'production' ? 'http://localhost:3030' : 'http://localhost:3030')
+      }
+    }),
   ]
 }
