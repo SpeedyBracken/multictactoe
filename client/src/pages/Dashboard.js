@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Fade from 'react-reveal/Fade'
+import { Link } from 'react-router-dom'
 
 import RoomCard from '~/components/RoomCard'
 
@@ -17,7 +18,6 @@ export default class Dashboard extends Component{
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.handleEnterRoom = this.handleEnterRoom.bind(this)
     }
 
     handleChange(key, value){
@@ -38,10 +38,6 @@ export default class Dashboard extends Component{
         this.setState({ rooms, title: '' })
     }
 
-    handleEnterRoom(id){
-        this.props.history.push(`/room/${id}`)
-    }
-
     render(){
         return (
             <Fade>
@@ -58,13 +54,19 @@ export default class Dashboard extends Component{
                     <div className="rooms-container">
                         {
                             this.state.rooms
-                            .map(room => 
-                                <RoomCard 
-                                    title={room.title} 
-                                    id={room.id}
-                                    key={room.title} 
-                                    handleEnterRoom={this.handleEnterRoom}
-                                />
+                            .map((room, index) => 
+                                <Link 
+                                    key={room.id}
+                                    to={{
+                                        pathname: '/room/' + index,
+                                        state: { id: room.id, title: room.title }
+                                    }}
+                                >
+                                    <RoomCard 
+                                        title={room.title} 
+                                        key={room.title} 
+                                    />
+                                </Link>
                             )
                         }
                     </div>
