@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Zoom from 'react-reveal/Zoom'
 
-import Logo from '../assets/logo_white.png'
+import Logo from '~/assets/logo_white.png'
 
 import './Login.scss'
 

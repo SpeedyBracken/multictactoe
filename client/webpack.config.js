@@ -1,7 +1,13 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin")
 const webpack = require('webpack')
+const path = require('path')
 
 module.exports = {
+  resolve: {
+    alias: {
+      '~': path.resolve(__dirname, 'src/')
+    }
+  },
   devServer: {
     historyApiFallback: true
   },
