@@ -30,7 +30,7 @@ export default class Login extends Component{
         return (
             <Zoom top>
                 <div className="login-container">
-                    <img src={Logo} />
+                    <img src={Logo} alt='' />
                     <form className="form-container" onSubmit={this.handleSubmit}>
                         <input 
                             placeholder='Nickname' 
