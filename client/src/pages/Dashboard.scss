@@ -1,0 +1,43 @@
+.dashboard-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    img {
+        width: 100px;
+        height: auto;
+        margin: 80px auto 30px;
+    }
+
+    form {
+        margin: 0 auto auto;
+        height: 30px;
+        align-items: center;
+        display: flex;
+    
+        input {
+            height: 100%;
+            padding: 0 10px;
+            margin: auto;
+            border-width: 0;
+            border-radius: 3px 0 0 3px;
+            outline: none;
+        }
+        button {
+            border: 0;
+            padding: 0 10px;
+            border-radius: 0 3px 3px 0;
+            margin: auto;
+            height: 100%;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: all 0.15s ease-in-out;
+
+            &:hover {
+                opacity: 1;
+                transition: all 0.15s ease-in-out;
+            }
+        }
+    }
+}
