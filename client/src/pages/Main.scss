@@ -1,0 +1,15 @@
+.main-component {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+
+    .loading-icon {
+        margin: auto auto 0;
+    }
+    .loading-text {
+        margin: 10px auto auto;
+        color: white;
+        font-size: 15px;
+    }
+}

@@ -34,13 +34,15 @@
       "name": "Guilherme Bromonschenkel",
       "email": "guilhermebromonschenkel@gmail.com",
       "url": "https://github.com/guilhermebkel"
-    }, {
+    },
+    {
       "name": "Lucas Coutinho de Oliveira",
       "email": "coutlcdo@gmail.com",
       "url": "https://github.com/coutlcdo"
     }
   ],
   "dependencies": {
+    "antd": "^3.23.2",
     "react-reveal": "^1.2.2",
     "react-router-dom": "^5.0.1",
     "sass-loader": "^8.0.0"
