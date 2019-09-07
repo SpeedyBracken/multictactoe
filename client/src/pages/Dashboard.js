@@ -17,6 +17,7 @@ export default class Dashboard extends Component{
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handleEnterRoom = this.handleEnterRoom.bind(this)
     }
 
     handleChange(key, value){
@@ -29,9 +30,16 @@ export default class Dashboard extends Component{
         event.preventDefault()
 
         let rooms = this.state.rooms
-        rooms.unshift({ title: this.state.title })
+        rooms.unshift({ 
+            title: this.state.title,
+            id: this.state.title.toLowerCase().replace(/[' ']/g, '_')
+        })
 
         this.setState({ rooms, title: '' })
+    }
+
+    handleEnterRoom(id){
+        this.props.history.push(`/room/${id}`)
     }
 
     render(){
@@ -49,7 +57,15 @@ export default class Dashboard extends Component{
                     </form>
                     <div className="rooms-container">
                         {
-                            this.state.rooms.map(room => <RoomCard title={room.title} key={room.title} />)
+                            this.state.rooms
+                            .map(room => 
+                                <RoomCard 
+                                    title={room.title} 
+                                    id={room.id}
+                                    key={room.title} 
+                                    handleEnterRoom={this.handleEnterRoom}
+                                />
+                            )
                         }
                     </div>
                 </div>
