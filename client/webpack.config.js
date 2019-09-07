@@ -3,6 +3,11 @@ const webpack = require('webpack')
 const path = require('path')
 
 module.exports = {
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'index_bundle.js',
+    publicPath: '/'
+  },
   resolve: {
     alias: {
       '~': path.resolve(__dirname, 'src/')

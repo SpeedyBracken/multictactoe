@@ -23,7 +23,7 @@ export default class Room extends Component{
         return (
             <Slide top>
                 <div className="room-container">
-                    <h1></h1>
+                    <h1>{this.state.title}</h1>
                 </div>
             </Slide>
         )
