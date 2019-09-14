@@ -1,20 +1,30 @@
 import React, { Component } from 'react'
 import Zoom from 'react-reveal/Zoom'
 import Auth from '../modules/Auth'
+import socketIOClient from "socket.io-client"
 
 import Logo from '~/assets/logo_white.png'
 
 import './Login.scss'
 
+const socket = socketIOClient(process.env.API_URL)
+
 export default class Login extends Component{
     constructor(props){
         super(props)
         this.state = {
-            nickname: ''
+            nickname: '',
+            rooms: []
         }
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    componentDidMount(){
+        socket.on('tableOfRooms', rooms => {
+            this.setState({ rooms })
+        })
     }
 
     handleSubmit(event){
@@ -23,7 +33,10 @@ export default class Login extends Component{
             nickname: this.state.nickname,
             id: []
         }
-        this.props.history.push('/dashboard')
+        this.props.history.push({
+            pathname: '/dashboard',
+            state: this.state.rooms
+        })
     }
 
     handleChange(key, value){

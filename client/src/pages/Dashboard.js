@@ -30,7 +30,7 @@ export default class Dashboard extends Component{
         if (!Auth.userData) this.props.history.push('/login')
 
         const { nickname } = Auth.userData
-        this.setState({ nickname })
+        this.setState({ nickname, rooms: this.props.location.state })
 
         socket.on('tableOfRooms', rooms => {
             this.setState({ rooms })
