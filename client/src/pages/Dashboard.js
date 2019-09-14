@@ -53,26 +53,12 @@ export default class Dashboard extends Component{
         event.preventDefault()
 
         let rooms = this.state.rooms
-        rooms.unshift({ title: this.state.title })
+        const title = this.state.title
+        const id = ++rooms.length 
+        
+        rooms.unshift({ title })
 
-        let title
-        let id
-
-        let newRooms = []
-        rooms.map((room, index) => {
-
-            if(room.title === this.state.title){
-                title = room.title,
-                id = index
-            }
-
-            newRooms.push({
-                title: room.title,
-                id: index
-            })
-        })
-
-        this.setState({ rooms: newRooms, title: '' })
+        this.setState({ rooms, title: '' })
         socket.emit('newRoom', { title, id })
     }
 
