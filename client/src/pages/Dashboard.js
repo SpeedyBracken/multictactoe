@@ -33,7 +33,6 @@ export default class Dashboard extends Component{
         this.setState({ nickname })
 
         socket.on('tableOfRooms', rooms => {
-            console.log(rooms)
             this.setState({ rooms })
         })
     }
