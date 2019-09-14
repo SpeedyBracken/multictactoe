@@ -72,7 +72,8 @@ export default class Room extends Component{
     render(){
         return(
             this.state.error
-            ?   !this.state.loading && <div className="not-found-warning"><h1>Room not found</h1></div>
+            ?   !this.state.loading 
+                && <div className="not-found-warning"><h1>Room not found</h1></div>
             
             :   !this.state.loading 
                 &&  <Slide top>
