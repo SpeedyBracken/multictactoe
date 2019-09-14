@@ -2,9 +2,39 @@
     display: flex;
     align-items: center;
     align-content: center;
+    height: 50px;
 
     h1 {
         color: white;
+        font-size: 20px;
+        margin: auto auto auto 25px;
+
+        strong {
+            border-bottom: solid 2px white;
+            cursor: pointer;
+            transition: all 0.1s ease-in-out;
+
+            &:hover{
+                opacity: 0.8;
+                transition: all 0.1s ease-in-out;
+            }
+        }
+    }
+
+    button {
+        color: white;
+        padding: 5px;
+        margin: auto 20px auto auto;
+        border: solid 1px white;
+        border-radius: 3px;
+        background-color: transparent;
+        cursor: pointer;
+        transition: all 0.1s ease-in-out;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transition: all 0.1s ease-in-out;
+        }
     }
 }
 
