@@ -75,6 +75,7 @@ export default class Dashboard extends Component{
                             placeholder="Room title" 
                             value={this.state.title} 
                             onChange={event => this.handleChange('title', event.target.value)}
+                            required
                         />
                         <button type="submit">Create Room</button>
                     </form>
