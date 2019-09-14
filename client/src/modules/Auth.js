@@ -20,8 +20,9 @@ class Auth extends Crypt{
 
     get userData(){
         const hash = localStorage.getItem('userData')
+        if (!hash) return false
+
         const data = this.getHashData(hash)
-        
         return JSON.parse(data)
     }
 
