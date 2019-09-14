@@ -53,10 +53,10 @@ export default class Dashboard extends Component{
 
         let rooms = this.state.rooms
         const title = this.state.title
-        const id = ++rooms.length 
+        const id = rooms.length 
         
-        rooms.unshift({ title })
-
+        rooms.unshift({ title, id })
+        console.log(rooms)
         this.setState({ rooms, title: '' })
         socket.emit('newRoom', { title, id })
     }
@@ -84,15 +84,15 @@ export default class Dashboard extends Component{
                             this.state.rooms
                             .map((room, index) => 
                                 <Link 
-                                    key={room.id}
+                                    key={'room-link-' + room.id}
                                     to={{
-                                        pathname: '/room/' + index,
+                                        pathname: '/room/' + room.id,
                                         state: { id: room.id, title: room.title }
                                     }}
                                 >
                                     <RoomCard 
                                         title={room.title} 
-                                        key={room.title} 
+                                        key={'room-card-' + room.id} 
                                     />
                                 </Link>
                             )
