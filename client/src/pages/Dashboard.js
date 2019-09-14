@@ -26,10 +26,12 @@ export default class Dashboard extends Component{
     }
 
     componentDidMount(){
-        //Auth.logout()
-        const userData = Auth.userData
+        Auth.logout()
+    
+        if (!Auth.userData) this.props.history.push('/login')
 
-        if (!userData) this.props.history.push('/login')
+        const { nickname } = Auth.userData
+        this.setState({ nickname })
 
         socket.on('tableOfRooms', rooms => {
             console.log(rooms)
@@ -47,14 +49,27 @@ export default class Dashboard extends Component{
         event.preventDefault()
 
         let rooms = this.state.rooms
-        rooms.unshift({ 
-            title: this.state.title,
-            id: this.state.title.toLowerCase().replace(/[' ']/g, '_')
+        rooms.unshift({ title: this.state.title })
+
+        let title
+        let id
+
+        let newRooms = []
+        rooms.map((room, index) => {
+
+            if(room.title === this.state.title){
+                title = room.title,
+                id = index
+            }
+
+            newRooms.push({
+                title: room.title,
+                id: index
+            })
         })
 
-        this.setState({ rooms, title: '' })
-
-        socket.emit('newRoom', {title: this.state.title, id: this.state.id})
+        this.setState({ rooms: newRooms, title: '' })
+        socket.emit('newRoom', { title, id })
     }
 
     render(){
