@@ -38,3 +38,14 @@
         }
     }
 }
+
+.not-found-warning {
+    display: flex;
+    height: 100vh;
+    
+    h1 {
+        margin: auto;
+        color: white;
+        font-size: 20px;
+    }
+}

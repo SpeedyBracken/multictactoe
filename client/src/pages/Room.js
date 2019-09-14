@@ -11,7 +11,7 @@ export default class Room extends Component{
     constructor(props){
         super(props)
         this.state = {
-            id: '',
+            id: +this.props.match.params.id,
             title: '',
             gameArea: [],
             player: {
@@ -21,12 +21,22 @@ export default class Room extends Component{
             type: true,
             rooms: [],
             loading: true,
+            error: false,
         }
 
         this.handlePlayerClick = this.handlePlayerClick.bind(this)
+        this.getRoomTitle = this.getRoomTitle.bind(this)
     }
 
     componentDidMount(){
+        if(this.props.location.state){
+            this.setState({
+                loading: false,
+                rooms: this.props.location.state.rooms,
+                title: this.props.location.state.title
+            })
+        }
+
         socket.on('tableOfRooms', rooms => {
             this.setState({ rooms, loading: false })
         })
@@ -36,11 +46,7 @@ export default class Room extends Component{
             gameArea.push({ id: i, mark: '' })
         }
 
-        this.setState({ 
-            gameArea,
-            id: +this.props.match.params.id, 
-            title: ''
-        })
+        this.setState({ gameArea })
     }
 
     handlePlayerClick(areaId){
@@ -55,13 +61,23 @@ export default class Room extends Component{
         this.setState({ gameArea, type: !this.state.type })
     }
 
+    getRoomTitle(){
+        const [ currentRoom ] = this.state.rooms.filter(room => +room.id === +this.state.id)
+    
+        if (!currentRoom) return this.setState({ error: true })
+
+        return currentRoom.title
+    }
+
     render(){
-        return (
-            <Slide top>
-                {
-                    !this.state.loading 
-                    &&  <div className="room-container">
-                            <h1>{this.state.rooms.filter(room => +room.id === +this.state.id)[0].title || ''}</h1>
+        return(
+            this.state.error
+            ?   !this.state.loading && <div className="not-found-warning"><h1>Room not found</h1></div>
+            
+            :   !this.state.loading 
+                &&  <Slide top>
+                        <div className="room-container">
+                            <h1>{this.getRoomTitle()}</h1>
                             <div className="tictactoe-grid">
                                 {
                                     this.state.gameArea
@@ -76,8 +92,7 @@ export default class Room extends Component{
                                 }
                             </div>
                         </div>
-                }
-            </Slide>
+                    </Slide>
         )
     }
 }

@@ -16,7 +16,7 @@ export default class Dashboard extends Component{
     constructor(props){
         super(props)
         this.state = {
-            rooms: [],
+            rooms: this.props.location.state,
             title: '',
             nickname: false,
         }
@@ -30,7 +30,7 @@ export default class Dashboard extends Component{
         if (!Auth.userData) this.props.history.push('/login')
 
         const { nickname } = Auth.userData
-        this.setState({ nickname, rooms: this.props.location.state })
+        this.setState({ nickname })
 
         socket.on('tableOfRooms', rooms => {
             this.setState({ rooms })
@@ -87,7 +87,7 @@ export default class Dashboard extends Component{
                                     key={'room-link-' + room.id}
                                     to={{
                                         pathname: '/room/' + room.id,
-                                        state: { id: room.id, title: room.title }
+                                        state: { id: room.id, title: room.title, rooms: this.state.rooms }
                                     }}
                                 >
                                     <RoomCard 
