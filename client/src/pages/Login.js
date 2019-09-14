@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Zoom from 'react-reveal/Zoom'
+import Auth from '../modules/Auth'
 
 import Logo from '~/assets/logo_white.png'
 
@@ -18,6 +19,10 @@ export default class Login extends Component{
 
     handleSubmit(event){
         event.preventDefault()
+        Auth.userData = {
+            nickname: this.state.nickname,
+            id: []
+        }
         this.props.history.push('/dashboard')
     }
 
