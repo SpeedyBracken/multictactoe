@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Fade from 'react-reveal/Fade'
 import { Link } from 'react-router-dom'
 import socketIOClient from "socket.io-client"
+import Auth from '../modules/Auth'
 
 import RoomCard from '~/components/RoomCard'
 
@@ -16,7 +17,8 @@ export default class Dashboard extends Component{
         super(props)
         this.state = {
             rooms: [],
-            title: ''
+            title: '',
+            nickname: false,
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -24,6 +26,11 @@ export default class Dashboard extends Component{
     }
 
     componentDidMount(){
+        //Auth.logout()
+        const userData = Auth.userData
+
+        if (!userData) this.props.history.push('/login')
+
         socket.on('tableOfRooms', rooms => {
             console.log(rooms)
             this.setState({ rooms })
@@ -53,6 +60,10 @@ export default class Dashboard extends Component{
     render(){
         return (
             <Fade>
+                <div className="navbar-container">
+                    <h1>Hello, <strong>{this.state.nickname}</strong></h1>
+                    <button>Logout</button>
+                </div>
                 <div className="dashboard-container">
                     <img src={Logo} alt='' />
                     <form onSubmit={this.handleSubmit}>

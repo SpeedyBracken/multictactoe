@@ -1,9 +1,9 @@
 export default class Crypt {
     generateHash(data){
-        return new Buffer(JSON.stringify(data)).toString('base64')
+        return btoa(data)
     }
     
     getHashData(hash){
-        return JSON.parse(hash)
+        return atob(hash)
     }
 }
