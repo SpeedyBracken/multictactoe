@@ -23,11 +23,10 @@ export default class Dashboard extends Component{
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handleLogout = this.handleLogout.bind(this)
     }
 
     componentDidMount(){
-        Auth.logout()
-    
         if (!Auth.userData) this.props.history.push('/login')
 
         const { nickname } = Auth.userData
@@ -37,6 +36,11 @@ export default class Dashboard extends Component{
             console.log(rooms)
             this.setState({ rooms })
         })
+    }
+
+    handleLogout(){
+        Auth.logout()
+        this.props.history.push('/login')
     }
 
     handleChange(key, value){
@@ -77,7 +81,7 @@ export default class Dashboard extends Component{
             <Fade>
                 <div className="navbar-container">
                     <h1>Hello, <strong>{this.state.nickname}</strong></h1>
-                    <button>Logout</button>
+                    <button onClick={this.handleLogout}>Logout</button>
                 </div>
                 <div className="dashboard-container">
                     <img src={Logo} alt='' />

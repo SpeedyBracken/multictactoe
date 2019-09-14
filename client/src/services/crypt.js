@@ -1,6 +1,6 @@
 export default class Crypt {
     generateHash(data){
-        return btoa(data)
+        return btoa(JSON.stringify(data))
     }
     
     getHashData(hash){
