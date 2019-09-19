@@ -2,6 +2,10 @@ import Crypt from '../services/crypt'
 
 class Auth extends Crypt{
     set userData(data){
+        data = {
+            ...data,
+            id: []
+        }
         const hashData = this.generateHash(data)
         localStorage.setItem('userData', hashData)
     }
@@ -9,13 +13,12 @@ class Auth extends Crypt{
     set userId(id){
         const hash = localStorage.getItem('userData')
         
-        let data = this.getHashData(hash)
-        data = {
-            ...data,
-            id: id.push(id)
-        }
+        let data = JSON.parse(this.getHashData(hash))
+        console.log('data', data)
+        data.id.push(id)
 
-        this.userData = data
+        const hashData = this.generateHash(data)
+        localStorage.setItem('userData', hashData)
     }
 
     get userData(){

@@ -33,6 +33,9 @@ export default class Login extends Component{
             nickname: this.state.nickname,
             id: []
         }
+
+        Auth.userId = socket.id
+
         this.props.history.push({
             pathname: '/dashboard',
             state: this.state.rooms

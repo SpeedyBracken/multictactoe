@@ -58,7 +58,7 @@ export default class Dashboard extends Component{
         rooms.unshift({ title, id })
         console.log(rooms)
         this.setState({ rooms, title: '' })
-        socket.emit('newRoom', { title, id })
+        socket.emit('newRoom', { title, id, playersId: [] })
     }
 
     render(){
@@ -82,7 +82,7 @@ export default class Dashboard extends Component{
                     <div className="rooms-container">
                         {
                             this.state.rooms
-                            .map((room, index) => 
+                            .map((room, index) =>
                                 <Link 
                                     key={'room-link-' + room.id}
                                     to={{

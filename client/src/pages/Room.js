@@ -21,8 +21,11 @@ export default class Room extends Component{
             type: true,
             rooms: [],
             loading: true,
-            error: false,
+            error: false
         }
+
+        socket.emit('Pair Room', Auth.userData.id, this.state.id)
+        console.log('Auth.userData', Auth.userData)
 
         this.handlePlayerClick = this.handlePlayerClick.bind(this)
         this.getRoomTitle = this.getRoomTitle.bind(this)
@@ -41,12 +44,24 @@ export default class Room extends Component{
             this.setState({ rooms, loading: false })
         })
 
+        socket.on('renderPlayerClick', (mark, dexin) => {
+            let gameArea = this.state.gameArea
+
+            gameArea.map((area, index) => {
+                if(dexin === index) {
+                    gameArea[index].mark = mark
+                }
+            })
+        })
+        
+        console.log('gameArea', this.state.gameArea)
+
         let gameArea = []
         for(let i=0; i<9; i++){
             gameArea.push({ id: i, mark: '' })
         }
 
-        this.setState({ gameArea })
+        setInterval(() => {this.setState({ gameArea })}, 100)
     }
 
     handlePlayerClick(areaId){
@@ -55,6 +70,7 @@ export default class Room extends Component{
         gameArea.map((area, index) => {
             if(area.id === areaId && !gameArea[index].mark){
                 gameArea[index].mark = this.state.type ? 'X' : 'O'
+                socket.emit('playerClick', gameArea[index].mark, index)
             }
         })
 
