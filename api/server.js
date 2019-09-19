@@ -18,17 +18,39 @@ app.use(index)
 
 let arrRooms = []
 
+setInterval(() => {
+    io.emit('concurrent-connections', io.engine.clientsCount)
+    console.log('connections', io.engine.clientsCount)
+}, 5000)
+
 io.on('connection', newConnection)
 
 function newConnection(socket) {
     console.log('New connection id= ' + socket.id)
+    socket.on('loguei', () => {
+        socket.emit('arrIds', socket.id)
+    })
 
-    socket.on('newRoom', (data) => {
+    socket.on('newRoom', data => {
         arrRooms.unshift(data)
         console.log("A new room was created", data)
     })
 
-    io.emit('tableOfRooms', arrRooms)
+    setInterval(() => {
+        io.emit('tableOfRooms', arrRooms)
+    }, 200)
+
+    socket.on('Pair Room', (idLocal, idSala) => {
+        arrRooms[idSala].playersId.push(idLocal)
+        console.log('arrRooms', arrRooms)
+
+        socket.join('room')
+
+        socket.on('playerClick', (data, index) => {
+            console.log('Player clicked', data)
+            io.sockets.to('room').emit('renderPlayerClick', data, index)
+        })
+    })
 
     socket.on('disconnect', () => console.log("Client disconnected"))
 }
