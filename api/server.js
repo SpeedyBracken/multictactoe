@@ -21,7 +21,7 @@ let arrRooms = []
 setInterval(() => {
     io.emit('concurrent-connections', io.engine.clientsCount)
     console.log('connections', io.engine.clientsCount)
-}, 5000)
+}, 15000)
 
 io.on('connection', newConnection)
 
@@ -41,16 +41,20 @@ function newConnection(socket) {
     }, 200)
 
     socket.on('Pair Room', (idLocal, idSala) => {
-        arrRooms[idSala].playersId.push(idLocal)
-        console.log('arrRooms', arrRooms)
+		if(arrRooms[idSala].players.length == 2) return
 
-        socket.join('room')
+		if(arrRooms[idSala].players.length == 0) arrRooms[idSala].players.push({ id: idLocal, mark: 'X' })
+		if(arrRooms[idSala].players.length == 1 && arrRooms[idSala].players[0].id !== idLocal) arrRooms[idSala].players.push({ id: idLocal, mark: 'O' })
+		console.log('arrRooms', arrRooms, arrRooms[idSala].players)
+		socket.join(`${idSala}`)
 
         socket.on('playerClick', (data, index) => {
             console.log('Player clicked', data)
-            io.sockets.to('room').emit('renderPlayerClick', data, index)
-        })
-    })
+            io.sockets.to(`${idSala}`).emit('renderPlayerClick', data, index)
+		})
+
+		if(arrRooms[idSala].players.length == 2) io.sockets.to(`${idSala}`).emit('assignMark', arrRooms[idSala].players)
+	})
 
     socket.on('disconnect', () => console.log("Client disconnected"))
 }
@@ -67,4 +71,4 @@ function newConnection(socket) {
 
 const listener = server.listen(process.env.PORT || 3030, () => {
     console.log("Node is listening on port: " + listener.address().port)
-}) 
+})
