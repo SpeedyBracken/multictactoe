@@ -4,7 +4,7 @@ class Auth extends Crypt{
     set userData(data){
         data = {
             ...data,
-            id: []
+            id: 0
         }
         const hashData = this.generateHash(data)
         localStorage.setItem('userData', hashData)
@@ -12,10 +12,10 @@ class Auth extends Crypt{
 
     set userId(id){
         const hash = localStorage.getItem('userData')
-        
+
         let data = JSON.parse(this.getHashData(hash))
         console.log('data', data)
-        data.id.push(id)
+        data.id = id
 
         const hashData = this.generateHash(data)
         localStorage.setItem('userData', hashData)

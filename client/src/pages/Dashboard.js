@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 import Fade from 'react-reveal/Fade'
 import { Link } from 'react-router-dom'
-import socketIOClient from "socket.io-client"
 import Auth from '../modules/Auth'
 
 import RoomCard from '~/components/RoomCard'
 
 import Logo from '~/assets/logo_white.png'
 
-import './Dashboard.scss'
+import socket from '../services/socketConnection'
 
-const socket = socketIOClient(process.env.API_URL)
+import './Dashboard.scss'
 
 export default class Dashboard extends Component{
     constructor(props){
@@ -53,12 +52,13 @@ export default class Dashboard extends Component{
 
         let rooms = this.state.rooms
         const title = this.state.title
-        const id = rooms.length 
-        
+		const id = rooms.length
+		const players = []
+
         rooms.unshift({ title, id })
         console.log(rooms)
         this.setState({ rooms, title: '' })
-        socket.emit('newRoom', { title, id, playersId: [] })
+        socket.emit('newRoom', { title, id, players })
     }
 
     render(){
@@ -71,9 +71,9 @@ export default class Dashboard extends Component{
                 <div className="dashboard-container">
                     <img src={Logo} alt='' />
                     <form onSubmit={this.handleSubmit}>
-                        <input 
-                            placeholder="Room title" 
-                            value={this.state.title} 
+                        <input
+                            placeholder="Room title"
+                            value={this.state.title}
                             onChange={event => this.handleChange('title', event.target.value)}
                             required
                         />
@@ -83,16 +83,16 @@ export default class Dashboard extends Component{
                         {
                             this.state.rooms
                             .map((room, index) =>
-                                <Link 
+                                <Link
                                     key={'room-link-' + room.id}
                                     to={{
                                         pathname: '/room/' + room.id,
                                         state: { id: room.id, title: room.title, rooms: this.state.rooms }
                                     }}
                                 >
-                                    <RoomCard 
-                                        title={room.title} 
-                                        key={'room-card-' + room.id} 
+                                    <RoomCard
+                                        title={room.title}
+                                        key={'room-card-' + room.id}
                                     />
                                 </Link>
                             )

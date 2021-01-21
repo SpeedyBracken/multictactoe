@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Spin, Icon } from 'antd'
-import io from 'socket.io-client'
 
 import './Main.scss'
 
@@ -14,7 +13,6 @@ export default class Main extends Component{
 
     componentDidMount(){
         this.props.history.push('/login')
-        io.connect(process.env.API_URL)
     }
 
     render(){

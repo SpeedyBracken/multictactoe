@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import Zoom from 'react-reveal/Zoom'
 import Auth from '../modules/Auth'
-import socketIOClient from "socket.io-client"
+
+import socket from '../services/socketConnection'
 
 import Logo from '~/assets/logo_white.png'
 
 import './Login.scss'
-
-const socket = socketIOClient(process.env.API_URL)
 
 export default class Login extends Component{
     constructor(props){
@@ -54,10 +53,10 @@ export default class Login extends Component{
                 <div className="login-container">
                     <img src={Logo} alt='' />
                     <form className="form-container" onSubmit={this.handleSubmit}>
-                        <input 
-                            placeholder='Nickname' 
-                            value={this.state.nickname} 
-                            onChange={event => this.handleChange('nickname', event.target.value)} 
+                        <input
+                            placeholder='Nickname'
+                            value={this.state.nickname}
+                            onChange={event => this.handleChange('nickname', event.target.value)}
                         />
                         <button type="submit">Login</button>
                     </form>
